@@ -231,6 +231,8 @@ for file in `ls "$BUILDPACK_DIR"/extra | sort`; do
   . "$BUILDPACK_DIR"/extra/$file
 done
 
+printenv
+
 #
 # Clear cache after build is done
 #
