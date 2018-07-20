@@ -151,6 +151,8 @@ fi
 METEOR_NODE=`METEOR node -e "process.stdout.write(process.execPath)"`
 # Assume npm is in the same dir as node.
 METEOR_NPM="`dirname "$METEOR_NODE"`/npm"
+# Path to patched Node 8.12 
+PATCHED_NODE="$APP_SOURCE_DIR/node"
 
 if [ -z "$METEOR_NPM" ] || [ -z "$METEOR_NODE" ] ; then
   echo "FATAL: Can't find npm/node within meteor bundle. This is a bug. Please open an issue at https://github.com/AdmitHub/meteor-buildpack-horse.";
@@ -159,7 +161,7 @@ fi
 
 # Copy node into place for production.
 NODE="$COMPILE_DIR"/bin/node
-cp "$METEOR_NODE" "$NODE"
+cp "$PATCHED_NODE" "$NODE"
 chmod a+x "$NODE"
 
 # Add npm and node path so that 1.4's npm-rebuild.js will function.
